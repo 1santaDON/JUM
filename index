@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Jumia Carriers | Apply & Pay</title>
+    <!-- Font Awesome 6 (free) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts: Inter & Poppins for clean UI -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f5f7fa;
+            color: #1e2a3a;
+            line-height: 1.5;
+            padding: 24px 16px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        /* header / brand */
+        .brand-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-icon {
+            background: #f68b1e;
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            box-shadow: 0 8px 16px -4px rgba(246, 139, 30, 0.25);
+        }
+
+        .logo-text {
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: #0f1a2b;
+        }
+
+        .logo-text span {
+            color: #f68b1e;
+        }
+
+        .carrier-tag {
+            background: #e8edf3;
+            padding: 6px 16px;
+            border-radius: 40px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #2c3e50;
+            margin-left: 12px;
+        }
+
+        /* main card */
+        .carrier-card {
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.12), 0 8px 24px -6px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* hero */
+        .hero {
+            background: linear-gradient(135deg, #0b1421 0%, #1a2c42 100%);
+            color: white;
+            padding: 32px 32px 28px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: "🚚";
+            position: absolute;
+            font-size: 160px;
+            right: -10px;
+            bottom: -50px;
+            opacity: 0.1;
+            transform: rotate(-10deg);
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #b0c4de;
+            max-width: 70%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .payment-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #f68b1e;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-top: 18px;
+            box-shadow: 0 6px 12px rgba(246, 139, 30, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* two column layout */
+        .job-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            background: white;
+        }
+
+        .job-info {
+            padding: 32px;
+            border-right: 1px solid #edf2f7;
+        }
+
+        .job-info h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .job-info h2 i {
+            color: #f68b1e;
+            font-size: 1.4rem;
+        }
+
+        .role-card {
+            background: #f9fcff;
+            border-radius: 16px;
+            padding: 18px 20px;
+            margin-bottom: 16px;
+            border: 1px solid #e9eef4;
+            transition: all 0.2s;
+        }
+
+        .role-card:hover {
+            border-color: #f68b1e;
+            background: #fffaf5;
+        }
+
+        .role-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .role-title span:last-child {
+            font-size: 0.9rem;
+            background: #eef2f6;
+            padding: 4px 12px;
+            border-radius: 40px;
+            color: #1e2a3a;
+            font-weight: 500;
+        }
+
+        .role-meta {
+            display: flex;
+            gap: 16px;
+            margin-top: 10px;
+            color: #5e6f7e;
+            font-size: 0.9rem;
+        }
+
+        .role-meta i {
+            margin-right: 4px;
+            color: #f68b1e;
+            width: 16px;
+        }
+
+        .requirements {
+            margin-top: 24px;
+            background: #f9fcff;
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid #e9eef4;
+        }
+
+        .requirements h3 {
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .requirements ul {
+            list-style: none;
+        }
+
+        .requirements li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: #2f4050;
+            padding: 6px 0;
+        }
+
+        .requirements li i {
+            color: #25a56e;
+            font-size: 0.8rem;
+            background: #e3f5ec;
+            padding: 4px;
+            border-radius: 50%;
+        }
+
+        /* payment + apply side */
+        .payment-section {
+            padding: 32px;
+            background: #ffffff;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .payment-section h2 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .payment-section h2 i {
+            color: #f68b1e;
+        }
+
+        .fee-box {
+            background: #f9fcff;
+            border-radius: 20px;
+            padding: 24px;
+            margin: 18px 0 24px;
+            border: 1px solid #e9eef4;
+            text-align: center;
+        }
+
+        .fee-amount {
+            font-size: 2.6rem;
+            font-weight: 700;
+            color: #0f1a2b;
+            line-height: 1.2;
+        }
+
+        .fee-amount small {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #6b7c8b;
+        }
+
+        .fee-label {
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.8rem;
+            color: #6b7c8b;
+            margin-bottom: 4px;
+        }
+
+        .fee-note {
+            background: #fff4e8;
+            border-radius: 12px;
+            padding: 12px 16px;
+            font-size: 0.9rem;
+            color: #a65d1a;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .fee-note i {
+            font-size: 1.1rem;
+        }
+
+        /* Form */
+        .apply-form {
+            margin-top: 8px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 6px;
+            color: #2c3e50;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px 16px;
+            border-radius: 14px;
+            border: 1.5px solid #e2e9f0;
+            font-size: 0.95rem;
+            font-family: 'Inter', sans-serif;
+            transition: 0.2s;
+            background: #ffffff;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #f68b1e;
+            box-shadow: 0 0 0 4px rgba(246, 139, 30, 0.12);
+        }
+
+        .form-group input.error {
+            border-color: #e74c3c;
+            background: #fff6f5;
+        }
+
+        .error-message {
+            font-size: 0.75rem;
+            color: #e74c3c;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .pay-btn {
+            background: #f68b1e;
+            color: white;
+            border: none;
+            padding: 16px 24px;
+            border-radius: 16px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: all 0.25s;
+            margin-top: 8px;
+            box-shadow: 0 12px 20px -8px rgba(246, 139, 30, 0.4);
+            font-family: 'Inter', sans-serif;
+            letter-spacing: -0.2px;
+        }
+
+        .pay-btn i {
+            font-size: 1.2rem;
+        }
+
+        .pay-btn:hover {
+            background: #e07b10;
+            transform: scale(1.01);
+            box-shadow: 0 16px 24px -8px rgba(246, 139, 30, 0.5);
+        }
+
+        .pay-btn:disabled {
+            background: #cbd5e1;
+            box-shadow: none;
+            transform: none;
+            cursor: not-allowed;
+            color: #f1f5f9;
+        }
+
+        .secure-text {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 0.8rem;
+            color: #6b7c8b;
+            margin-top: 16px;
+        }
+
+        .secure-text i {
+            color: #25a56e;
+        }
+
+        /* toast message */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #1e2a3a;
+            color: white;
+            padding: 16px 28px;
+            border-radius: 60px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1000;
+            pointer-events: none;
+            white-space: nowrap;
+            max-width: 90vw;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .toast i {
+            color: #25a56e;
+            font-size: 1.3rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 850px) {
+            .job-details {
+                grid-template-columns: 1fr;
+            }
+
+            .job-info {
+                border-right: none;
+                border-bottom: 1px solid #edf2f7;
+            }
+
+            .hero p {
+                max-width: 100%;
+            }
+
+            .hero h1 {
+                font-size: 1.9rem;
+            }
+        }
+
+        @media (max-width: 550px) {
+            body {
+                padding: 12px 10px;
+            }
+
+            .hero {
+                padding: 24px 20px;
+            }
+
+            .hero h1 {
+                font-size: 1.6rem;
+            }
+
+            .hero p {
+                font-size: 0.95rem;
+            }
+
+            .job-info,
+            .payment-section {
+                padding: 24px 20px;
+            }
+
+            .brand-bar {
+                flex-wrap: wrap;
+            }
+
+            .carrier-tag {
+                margin-left: 0;
+                font-size: 12px;
+            }
+
+            .fee-amount {
+                font-size: 2.2rem;
+            }
+
+            .toast {
+                white-space: normal;
+                text-align: center;
+                border-radius: 24px;
+                padding: 14px 20px;
+                width: 90%;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .role-title {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 6px;
+            }
+
+            .role-title span:last-child {
+                align-self: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Brand header -->
+        <div class="brand-bar">
+            <div class="logo">
+                <div class="logo-icon"><i class="fas fa-truck-fast"></i></div>
+                <div class="logo-text">Jumia<span>Carriers</span></div>
+            </div>
+            <div class="carrier-tag"><i class="fas fa-briefcase"></i> Driver & Logistics</div>
+        </div>
+
+        <!-- Main card -->
+        <div class="carrier-card">
+            <!-- Hero -->
+            <div class="hero">
+                <h1>Drive with Jumia. <br>Earn more.</h1>
+                <p>Join our carrier network and deliver smiles across Nigeria.</p>
+                <div class="payment-badge">
+                    <i class="fas fa-lock"></i> Application fee: $20 USD
+                </div>
+            </div>
+
+            <!-- Two columns -->
+            <div class="job-details">
+                <!-- Left: job info -->
+                <div class="job-info">
+                    <h2><i class="fas fa-clipboard-list"></i> Open positions</h2>
+
+                    <div class="role-card">
+                        <div class="role-title">
+                            <span>Delivery Rider</span>
+                            <span>Lagos</span>
+                        </div>
+                        <div class="role-meta">
+                            <span><i class="fas fa-motorcycle"></i> Bike</span>
+                            <span><i class="fas fa-clock"></i> Full time</span>
+                        </div>
+                    </div>
+
+                    <div class="role-card">
+                        <div class="role-title">
+                            <span>Van Driver</span>
+                            <span>Abuja</span>
+                        </div>
+                        <div class="role-meta">
+                            <span><i class="fas fa-truck"></i> Van</span>
+                            <span><i class="fas fa-clock"></i> Full time</span>
+                        </div>
+                    </div>
+
+                    <div class="requirements">
+                        <h3><i class="fas fa-check-circle" style="color:#f68b1e;"></i> Requirements</h3>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Valid driver's license</li>
+                            <li><i class="fas fa-check"></i> 1+ year driving experience</li>
+                            <li><i class="fas fa-check"></i> Smartphone with data</li>
+                            <li><i class="fas fa-check"></i> Good knowledge of local routes</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Right: payment & apply -->
+                <div class="payment-section">
+                    <h2><i class="fas fa-wallet"></i> Pay & apply</h2>
+
+                    <div class="fee-box">
+                        <div class="fee-label">Application processing fee</div>
+                        <div class="fee-amount">$20 <small>USD</small></div>
+                        <div class="fee-note">
+                            <i class="fas fa-info-circle"></i>
+                            <span>One-time payment. Non-refundable.</span>
+                        </div>
+                    </div>
+
+                    <form class="apply-form" id="applicationForm">
+                        <div class="form-group">
+                            <label for="fullName">Full name</label>
+                            <input type="text" id="fullName" placeholder="e.g. John Adeyemi" autocomplete="name">
+                            <div class="error-message" id="nameError">Please enter your full name</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email address</label>
+                            <input type="email" id="email" placeholder="john@example.com" autocomplete="email">
+                            <div class="error-message" id="emailError">Enter a valid email address</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Phone number</label>
+                            <input type="tel" id="phone" placeholder="080 1234 5678" autocomplete="tel">
+                            <div class="error-message" id="phoneError">Enter a valid phone number (10+ digits)</div>
+                        </div>
+
+                        <button type="submit" class="pay-btn" id="payButton">
+                            <i class="fas fa-lock"></i> Pay $20 & Apply
+                        </button>
+
+                        <div class="secure-text">
+                            <i class="fas fa-shield-alt"></i> Secure payment • Your data is protected
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast notification -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle" id="toastIcon"></i>
+        <span id="toastMessage">Payment successful! Application submitted.</span>
+    </div>
+
+    <script>
+        (function() {
+            const form = document.getElementById('applicationForm');
+            const payBtn = document.getElementById('payButton');
+            const fullNameInput = document.getElementById('fullName');
+            const emailInput = document.getElementById('email');
+            const phoneInput = document.getElementById('phone');
+
+            const nameError = document.getElementById('nameError');
+            const emailError = document.getElementById('emailError');
+            const phoneError = document.getElementById('phoneError');
+
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            const toastIcon = document.getElementById('toastIcon');
+
+            let toastTimer = null;
+
+            // Helper to show toast
+            function showToast(message, isSuccess = true) {
+                toastMessage.textContent = message;
+                if (isSuccess) {
+                    toastIcon.className = 'fas fa-check-circle';
+                    toastIcon.style.color = '#25a56e';
+                } else {
+                    toastIcon.className = 'fas fa-exclamation-circle';
+                    toastIcon.style.color = '#e74c3c';
+                }
+                toast.classList.add('show');
+
+                if (toastTimer) clearTimeout(toastTimer);
+                toastTimer = setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 4000);
+            }
+
+            // Validation helpers
+            function validateName() {
+                const value = fullNameInput.value.trim();
+                if (value.length < 2) {
+                    nameError.classList.add('show');
+                    fullNameInput.classList.add('error');
+                    return false;
+                } else {
+                    nameError.classList.remove('show');
+                    fullNameInput.classList.remove('error');
+                    return true;
+                }
+            }
+
+            function validateEmail() {
+                const value = emailInput.value.trim();
+                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailPattern.test(value)) {
+                    emailError.classList.add('show');
+                    emailInput.classList.add('error');
+                    return false;
+                } else {
+                    emailError.classList.remove('show');
+                    emailInput.classList.remove('error');
+                    return true;
+                }
+            }
+
+            function validatePhone() {
+                const value = phoneInput.value.trim();
+                // Remove spaces, allow + and digits, at least 10 digits
+                const cleaned = value.replace(/[\s\-\(\)]/g, '');
+                const digitsOnly = cleaned.replace(/\D/g, '');
+                if (digitsOnly.length < 10) {
+                    phoneError.classList.add('show');
+                    phoneInput.classList.add('error');
+                    return false;
+                } else {
+                    phoneError.classList.remove('show');
+                    phoneInput.classList.remove('error');
+                    return true;
+                }
+            }
+
+            // Real-time validation on blur
+            fullNameInput.addEventListener('blur', validateName);
+            emailInput.addEventListener('blur', validateEmail);
+            phoneInput.addEventListener('blur', validatePhone);
+
+            // Clear error on input
+            fullNameInput.addEventListener('input', function() {
+                if (this.value.trim().length >= 2) {
+                    nameError.classList.remove('show');
+                    this.classList.remove('error');
+                }
+            });
+
+            emailInput.addEventListener('input', function() {
+                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (emailPattern.test(this.value.trim())) {
+                    emailError.classList.remove('show');
+                    this.classList.remove('error');
+                }
+            });
+
+            phoneInput.addEventListener('input', function() {
+                const cleaned = this.value.replace(/[\s\-\(\)]/g, '');
+                const digitsOnly = cleaned.replace(/\D/g, '');
+                if (digitsOnly.length >= 10) {
+                    phoneError.classList.remove('show');
+                    this.classList.remove('error');
+                }
+            });
+
+            // Form submit
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                // Validate all fields
+                const isNameValid = validateName();
+                const isEmailValid = validateEmail();
+                const isPhoneValid = validatePhone();
+
+                if (!isNameValid || !isEmailValid || !isPhoneValid) {
+                    showToast('Please fix the errors in the form.', false);
+                    return;
+                }
+
+                // Simulate payment process
+                const originalText = payBtn.innerHTML;
+                payBtn.disabled = true;
+                payBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing payment...';
+
+                // Simulate API call / payment gateway (2 seconds)
+                setTimeout(() => {
+                    // Reset button
+                    payBtn.disabled = false;
+                    payBtn.innerHTML = originalText;
+
+                    // Show success message
+                    showToast('✅ Payment of $20 USD successful! Your application has been submitted.', true);
+
+                    // Optionally clear form
+                    form.reset();
+
+                    // Reset all error states
+                    [fullNameInput, emailInput, phoneInput].forEach(input => input.classList.remove('error'));
+                    [nameError, emailError, phoneError].forEach(err => err.classList.remove('show'));
+
+                    // (In a real scenario, you'd redirect or show next steps)
+                    // We also might want to log the "application" to console
+                    console.log('Application submitted:', {
+                        name: fullNameInput.value.trim() || 'N/A',
+                        email: emailInput.value.trim() || 'N/A',
+                        phone: phoneInput.value.trim() || 'N/A',
+                        paid: '$20 USD',
+                        timestamp: new Date().toISOString()
+                    });
+                }, 1800);
+            });
+
+            // Prevent double submit if you want extra safety (already disabled)
+        })();
+    </script>
+</body>
+</html>
